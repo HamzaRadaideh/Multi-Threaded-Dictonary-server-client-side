@@ -10,6 +10,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 public class App extends JFrame {
     private static final String SERVER_IP = "127.0.0.1"; // Assuming server is running on localhost
     private static final int SERVER_PORT = 8888;
@@ -42,6 +45,31 @@ public class App extends JFrame {
         inputPanel.add(new JLabel("Enter a word:"));
         inputPanel.add(inputField);
         inputPanel.add(sendButton);
+
+        // Add ActionListener to the sendButton
+        sendButton.addActionListener(e -> {
+            // Perform your desired action here
+            System.out.println("Send button clicked!");
+        });
+
+        // Add KeyListener to the inputField
+        inputField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    // Simulate a click on the sendButton when Enter is pressed
+                    sendButton.doClick();
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
 
         add(scrollPane, BorderLayout.CENTER);
         add(inputPanel, BorderLayout.SOUTH);
